@@ -10,19 +10,18 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
 overflow:hidden;
-background:linear-gradient(to bottom,#ffd6e7,#ffc0da);
-color:#fff;
+background:linear-gradient(180deg,#ffd7ea,#ffc0dd);
 }
 
-.slide{
+.slide,.scene{
+display:none;
 width:100%;
 height:100vh;
-display:none;
 justify-content:center;
 align-items:center;
 flex-direction:column;
@@ -35,310 +34,331 @@ left:0;
 
 .active{
 display:flex;
-animation:fade .8s ease;
+animation:fade .7s ease;
 }
 
 @keyframes fade{
-from{opacity:0;transform:scale(.95);}
-to{opacity:1;transform:scale(1);}
+from{opacity:0;}
+to{opacity:1;}
 }
 
 h1{
-font-size:2.2rem;
-margin-bottom:15px;
-text-shadow:0 0 10px rgba(255,255,255,.6);
+font-size:2rem;
+color:#8a0048;
+margin-bottom:12px;
 }
 
 p{
-font-size:1.1rem;
+font-size:1.05rem;
+color:#5a0030;
 max-width:320px;
 line-height:1.5;
+font-weight:600;
 }
 
 button{
-margin-top:30px;
+margin-top:22px;
 padding:12px 28px;
 border:none;
 border-radius:30px;
-background:#fff;
-color:#ff4d88;
-font-weight:bold;
+background:#ff4f91;
+color:#fff;
 font-size:1rem;
+font-weight:bold;
 cursor:pointer;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
-/* Slide1 bouquet */
+/* slide 1 */
 .bouquet{
-font-size:80px;
-position:absolute;
-bottom:-150px;
-animation:rise 2.2s forwards;
+font-size:95px;
+position:relative;
+top:180px;
+animation:rise 2s forwards;
 }
 
 @keyframes rise{
-to{
-bottom:52%;
-transform:translateY(50%);
-}
+to{top:0;}
 }
 
-/* heart pulse */
-.bigHeart{
-font-size:110px;
-animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.15);}
-}
-
-/* arrows */
-.arrowWrap{
-position:relative;
-width:260px;
-height:260px;
-margin-bottom:20px;
-}
-
-.centerGirl{
-font-size:90px;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-}
-
-.arrow{
-position:absolute;
-font-size:35px;
-animation:bounce 1s infinite alternate;
-}
-
-.a1{top:0;left:50%;}
-.a2{bottom:0;left:50%;transform:rotate(180deg);}
-.a3{left:0;top:50%;transform:rotate(-90deg);}
-.a4{right:0;top:50%;transform:rotate(90deg);}
-
-@keyframes bounce{
-from{margin:0;}
-to{margin:8px;}
-}
-
-/* earth */
-.earth{
-font-size:90px;
-animation:spin 5s linear infinite;
-margin-bottom:15px;
-}
-
-@keyframes spin{
-from{transform:rotate(0);}
-to{transform:rotate(360deg);}
-}
-
-/* game */
-.gameBox{
-width:320px;
-height:420px;
-background:rgba(255,255,255,.18);
-border-radius:25px;
-position:relative;
+/* scene */
+.scene{
+background:linear-gradient(180deg,#ffd7ea,#ffc0dd);
 overflow:hidden;
 }
 
-.claw{
+.arrow{
+font-size:70px;
 position:absolute;
-top:10px;
-left:140px;
-font-size:45px;
-transition:.15s;
+left:-120px;
+top:45%;
+animation:shoot 1.5s forwards;
 }
 
-.catchHeart{
+@keyframes shoot{
+to{left:42%;}
+}
+
+.heart{
+font-size:95px;
 position:absolute;
-bottom:20px;
-left:140px;
-font-size:40px;
-animation:floatHeart 1s infinite alternate;
+left:58%;
+top:42%;
+animation:beat 1s infinite;
 }
 
-@keyframes floatHeart{
-from{transform:translateY(0);}
-to{transform:translateY(-8px);}
+@keyframes beat{
+50%{transform:scale(1.15);}
 }
 
-.controls{
-display:flex;
-gap:10px;
-margin-top:15px;
+.hit{
+animation:boom .5s forwards;
+}
+
+@keyframes boom{
+to{
+transform:scale(1.8);
+opacity:0;
+}
+}
+
+.earth{
+font-size:95px;
+animation:spin 5s linear infinite;
+margin-bottom:10px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
 }
 
 .ticket{
-font-size:80px;
-animation:ticketFly 1s infinite alternate;
+font-size:90px;
+animation:float 1s infinite alternate;
 }
 
-@keyframes ticketFly{
-from{transform:translateY(0);}
+@keyframes float{
 to{transform:translateY(-10px);}
 }
 
 .choice{
 display:flex;
-gap:15px;
+gap:14px;
 }
 
-.small{
-font-size:.95rem;
+/* GAME */
+canvas{
+background:#fff0f6;
+border:4px solid #ff7eb2;
+border-radius:18px;
 margin-top:10px;
 }
 
+.score{
+margin-top:10px;
+font-weight:bold;
+color:#8a0048;
+}
 </style>
 </head>
 <body>
 
-<!-- MUSIC -->
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5b0f3f6d8a.mp3?filename=romantic-love-112199.mp3">
-</audio>
-
 <!-- Slide 1 -->
-<div class="slide active">
+<div class="slide active" id="s1">
 <div class="bouquet">💐</div>
-<h1 style="margin-top:180px;">Happy Anniversary Baby ❤️</h1>
-<button onclick="nextSlide()">Next</button>
+<h1>Happy Anniversary Baby ❤️</h1>
+<button onclick="startScene()">Next</button>
+</div>
+
+<!-- Arrow Scene -->
+<div class="scene" id="scene">
+<div class="arrow">🏹</div>
+<div class="heart" id="love">❤️</div>
 </div>
 
 <!-- Slide 2 -->
-<div class="slide">
-<div class="bigHeart">💘</div>
-<h1>Dear Baby</h1>
-<p>You make ordinary days feel magical. Thank you for being my happiness.</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide" id="s2">
+<h1>Dear Baby 💌</h1>
+<p>You make every ordinary day feel magical.</p>
+<button onclick="next(2)">Next</button>
 </div>
 
 <!-- Slide 3 -->
-<div class="slide">
-<div class="arrowWrap">
-<div class="arrow a1">⬇️</div>
-<div class="arrow a2">⬆️</div>
-<div class="arrow a3">➡️</div>
-<div class="arrow a4">⬅️</div>
-<div class="centerGirl">👧🏻</div>
-</div>
-<h1>My Favorite Girl</h1>
-<button onclick="nextSlide()">Next</button>
+<div class="slide" id="s3">
+<h1>My Favorite Girl 👧🏻</h1>
+<p>No matter where I look... it's always you.</p>
+<button onclick="next(3)">Next</button>
 </div>
 
 <!-- Slide 4 -->
-<div class="slide">
+<div class="slide" id="s4">
 <h1>I Love That We Met</h1>
-<p>Out of everyone in this world, life somehow led me to you.</p>
-<button onclick="nextSlide()">Next</button>
+<p>Out of everyone in this world, life led me to you.</p>
+<button onclick="next(4)">Next</button>
 </div>
 
 <!-- Slide 5 -->
-<div class="slide">
+<div class="slide" id="s5">
 <div class="earth">🌍</div>
 <h1>I'd Give You The World If I Could</h1>
 <p>Because you deserve every beautiful thing.</p>
-<button onclick="nextSlide()">Next</button>
+<button onclick="next(5)">Next</button>
 </div>
 
-<!-- Slide 6 Game -->
-<div class="slide">
-<h1>Catch The Love ❤️</h1>
-<div class="gameBox">
-<div class="claw" id="claw">🕹️</div>
-<div class="catchHeart" id="heart">❤️</div>
-</div>
-
-<div class="controls">
-<button onclick="moveLeft()">←</button>
-<button onclick="grab()">Catch</button>
-<button onclick="moveRight()">→</button>
-</div>
-
-<p class="small">Catch the heart to win prizes!</p>
+<!-- GAME -->
+<div class="slide" id="s6">
+<h1>Feed The Love Snake ❤️</h1>
+<canvas id="game" width="300" height="300"></canvas>
+<div class="score">Eat 3 hearts to win!</div>
+<p>Swipe or use arrow keys.</p>
 </div>
 
 <!-- Prize 1 -->
-<div class="slide">
+<div class="slide" id="s7">
 <div class="ticket">🎟️</div>
 <h1>Unlimited Kiss Ticket</h1>
-<button onclick="nextSlide()">Next Prize</button>
+<button onclick="next(7)">Next Prize</button>
 </div>
 
 <!-- Prize 2 -->
-<div class="slide">
+<div class="slide" id="s8">
 <div class="ticket">🎟️</div>
 <h1>Movie Night Together</h1>
-<button onclick="nextSlide()">Continue</button>
+<button onclick="next(8)">Continue</button>
 </div>
 
 <!-- Choice -->
-<div class="slide">
+<div class="slide" id="s9">
 <h1>Would You Take The Prize?</h1>
 <div class="choice">
-<button onclick="yesPrize()">YES 💖</button>
-<button onclick="noPrize()">NO 😢</button>
+<button onclick="yes()">YES 💖</button>
+<button onclick="alert('No option unavailable 😏')">NO</button>
 </div>
 </div>
 
 <!-- Final -->
-<div class="slide" id="finalSlide">
-<div class="ticket">🎟️</div>
-<h1>YAY! I Love You Baby ❤️</h1>
-<p>Your prize has been accepted.</p>
+<div class="slide" id="s10">
+<h1>I Love You Baby ❤️</h1>
+<p>Thank you for being mine.</p>
 </div>
 
 <script>
-let slides=document.querySelectorAll('.slide');
-let current=0;
-
-function nextSlide(){
-slides[current].classList.remove('active');
-current++;
-slides[current].classList.add('active');
+function hideAll(){
+document.querySelectorAll('.slide,.scene').forEach(el=>el.classList.remove('active'));
 }
 
-let claw=document.getElementById('claw');
-let pos=140;
+function startScene(){
+hideAll();
+document.getElementById('scene').classList.add('active');
 
-function moveLeft(){
-if(pos>20){
-pos-=30;
-claw.style.left=pos+'px';
-}
-}
+setTimeout(()=>{
+document.getElementById('love').classList.add('hit');
+},1400);
 
-function moveRight(){
-if(pos<260){
-pos+=30;
-claw.style.left=pos+'px';
-}
+setTimeout(()=>{
+hideAll();
+document.getElementById('s2').classList.add('active');
+},2200);
 }
 
-function grab(){
-if(pos>110 && pos<180){
-slides[current].classList.remove('active');
-current=6;
-slides[current].classList.add('active');
+function next(n){
+hideAll();
+document.getElementById('s'+(n+1)).classList.add('active');
+if(n+1===6) startGame();
+}
+
+function yes(){
+hideAll();
+document.getElementById('s10').classList.add('active');
+}
+
+/* SNAKE GAME */
+let canvas=document.getElementById("game");
+let ctx=canvas.getContext("2d");
+let box=20;
+let snake,food,dir,score,game;
+
+function startGame(){
+snake=[{x:140,y:140}];
+food=randomFood();
+dir="RIGHT";
+score=0;
+clearInterval(game);
+game=setInterval(draw,180);
+}
+
+function randomFood(){
+return {
+x:Math.floor(Math.random()*15)*20,
+y:Math.floor(Math.random()*15)*20
+};
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key==="ArrowUp"&&dir!="DOWN")dir="UP";
+if(e.key==="ArrowDown"&&dir!="UP")dir="DOWN";
+if(e.key==="ArrowLeft"&&dir!="RIGHT")dir="LEFT";
+if(e.key==="ArrowRight"&&dir!="LEFT")dir="RIGHT";
+});
+
+let startX=0,startY=0;
+canvas.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+startY=e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchend",e=>{
+let dx=e.changedTouches[0].clientX-startX;
+let dy=e.changedTouches[0].clientY-startY;
+
+if(Math.abs(dx)>Math.abs(dy)){
+if(dx>0&&dir!="LEFT")dir="RIGHT";
+else if(dx<0&&dir!="RIGHT")dir="LEFT";
 }else{
-alert("Try Again Baby ❤️");
+if(dy>0&&dir!="UP")dir="DOWN";
+else if(dy<0&&dir!="DOWN")dir="UP";
 }
+});
+
+function draw(){
+ctx.clearRect(0,0,300,300);
+
+for(let s of snake){
+ctx.font="18px Arial";
+ctx.fillText("❤️",s.x,s.y+18);
 }
 
-function yesPrize(){
-slides[current].classList.remove('active');
-current=9;
-slides[current].classList.add('active');
+ctx.fillText("💖",food.x,food.y+18);
+
+let headX=snake[0].x;
+let headY=snake[0].y;
+
+if(dir=="UP")headY-=box;
+if(dir=="DOWN")headY+=box;
+if(dir=="LEFT")headX-=box;
+if(dir=="RIGHT")headX+=box;
+
+if(headX===food.x && headY===food.y){
+score++;
+food=randomFood();
+if(score>=3){
+clearInterval(game);
+hideAll();
+document.getElementById('s7').classList.add('active');
+return;
+}
+}else{
+snake.pop();
 }
 
-function noPrize(){
-alert("No option unavailable 😏❤️");
+let newHead={x:headX,y:headY};
+
+if(headX<0||headY<0||headX>=300||headY>=300){
+snake=[{x:140,y:140}];
+dir="RIGHT";
+return;
+}
+
+snake.unshift(newHead);
 }
 </script>
 
