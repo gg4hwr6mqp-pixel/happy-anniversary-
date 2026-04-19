@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary Baby</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(to bottom,#ffd6e7,#ffc0da);
+color:#fff;
+}
+
+.slide{
+width:100%;
+height:100vh;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+position:absolute;
+top:0;
+left:0;
+}
+
+.active{
+display:flex;
+animation:fade .8s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:scale(.95);}
+to{opacity:1;transform:scale(1);}
+}
+
+h1{
+font-size:2.2rem;
+margin-bottom:15px;
+text-shadow:0 0 10px rgba(255,255,255,.6);
+}
+
+p{
+font-size:1.1rem;
+max-width:320px;
+line-height:1.5;
+}
+
+button{
+margin-top:30px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:#fff;
+color:#ff4d88;
+font-weight:bold;
+font-size:1rem;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* Slide1 bouquet */
+.bouquet{
+font-size:80px;
+position:absolute;
+bottom:-150px;
+animation:rise 2.2s forwards;
+}
+
+@keyframes rise{
+to{
+bottom:52%;
+transform:translateY(50%);
+}
+}
+
+/* heart pulse */
+.bigHeart{
+font-size:110px;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.15);}
+}
+
+/* arrows */
+.arrowWrap{
+position:relative;
+width:260px;
+height:260px;
+margin-bottom:20px;
+}
+
+.centerGirl{
+font-size:90px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+.arrow{
+position:absolute;
+font-size:35px;
+animation:bounce 1s infinite alternate;
+}
+
+.a1{top:0;left:50%;}
+.a2{bottom:0;left:50%;transform:rotate(180deg);}
+.a3{left:0;top:50%;transform:rotate(-90deg);}
+.a4{right:0;top:50%;transform:rotate(90deg);}
+
+@keyframes bounce{
+from{margin:0;}
+to{margin:8px;}
+}
+
+/* earth */
+.earth{
+font-size:90px;
+animation:spin 5s linear infinite;
+margin-bottom:15px;
+}
+
+@keyframes spin{
+from{transform:rotate(0);}
+to{transform:rotate(360deg);}
+}
+
+/* game */
+.gameBox{
+width:320px;
+height:420px;
+background:rgba(255,255,255,.18);
+border-radius:25px;
+position:relative;
+overflow:hidden;
+}
+
+.claw{
+position:absolute;
+top:10px;
+left:140px;
+font-size:45px;
+transition:.15s;
+}
+
+.catchHeart{
+position:absolute;
+bottom:20px;
+left:140px;
+font-size:40px;
+animation:floatHeart 1s infinite alternate;
+}
+
+@keyframes floatHeart{
+from{transform:translateY(0);}
+to{transform:translateY(-8px);}
+}
+
+.controls{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.ticket{
+font-size:80px;
+animation:ticketFly 1s infinite alternate;
+}
+
+@keyframes ticketFly{
+from{transform:translateY(0);}
+to{transform:translateY(-10px);}
+}
+
+.choice{
+display:flex;
+gap:15px;
+}
+
+.small{
+font-size:.95rem;
+margin-top:10px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5b0f3f6d8a.mp3?filename=romantic-love-112199.mp3">
+</audio>
+
+<!-- Slide 1 -->
+<div class="slide active">
+<div class="bouquet">💐</div>
+<h1 style="margin-top:180px;">Happy Anniversary Baby ❤️</h1>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+<div class="bigHeart">💘</div>
+<h1>Dear Baby</h1>
+<p>You make ordinary days feel magical. Thank you for being my happiness.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+<div class="arrowWrap">
+<div class="arrow a1">⬇️</div>
+<div class="arrow a2">⬆️</div>
+<div class="arrow a3">➡️</div>
+<div class="arrow a4">⬅️</div>
+<div class="centerGirl">👧🏻</div>
+</div>
+<h1>My Favorite Girl</h1>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+<h1>I Love That We Met</h1>
+<p>Out of everyone in this world, life somehow led me to you.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+<div class="earth">🌍</div>
+<h1>I'd Give You The World If I Could</h1>
+<p>Because you deserve every beautiful thing.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 6 Game -->
+<div class="slide">
+<h1>Catch The Love ❤️</h1>
+<div class="gameBox">
+<div class="claw" id="claw">🕹️</div>
+<div class="catchHeart" id="heart">❤️</div>
+</div>
+
+<div class="controls">
+<button onclick="moveLeft()">←</button>
+<button onclick="grab()">Catch</button>
+<button onclick="moveRight()">→</button>
+</div>
+
+<p class="small">Catch the heart to win prizes!</p>
+</div>
+
+<!-- Prize 1 -->
+<div class="slide">
+<div class="ticket">🎟️</div>
+<h1>Unlimited Kiss Ticket</h1>
+<button onclick="nextSlide()">Next Prize</button>
+</div>
+
+<!-- Prize 2 -->
+<div class="slide">
+<div class="ticket">🎟️</div>
+<h1>Movie Night Together</h1>
+<button onclick="nextSlide()">Continue</button>
+</div>
+
+<!-- Choice -->
+<div class="slide">
+<h1>Would You Take The Prize?</h1>
+<div class="choice">
+<button onclick="yesPrize()">YES 💖</button>
+<button onclick="noPrize()">NO 😢</button>
+</div>
+</div>
+
+<!-- Final -->
+<div class="slide" id="finalSlide">
+<div class="ticket">🎟️</div>
+<h1>YAY! I Love You Baby ❤️</h1>
+<p>Your prize has been accepted.</p>
+</div>
+
+<script>
+let slides=document.querySelectorAll('.slide');
+let current=0;
+
+function nextSlide(){
+slides[current].classList.remove('active');
+current++;
+slides[current].classList.add('active');
+}
+
+let claw=document.getElementById('claw');
+let pos=140;
+
+function moveLeft(){
+if(pos>20){
+pos-=30;
+claw.style.left=pos+'px';
+}
+}
+
+function moveRight(){
+if(pos<260){
+pos+=30;
+claw.style.left=pos+'px';
+}
+}
+
+function grab(){
+if(pos>110 && pos<180){
+slides[current].classList.remove('active');
+current=6;
+slides[current].classList.add('active');
+}else{
+alert("Try Again Baby ❤️");
+}
+}
+
+function yesPrize(){
+slides[current].classList.remove('active');
+current=9;
+slides[current].classList.add('active');
+}
+
+function noPrize(){
+alert("No option unavailable 😏❤️");
+}
+</script>
+
+</body>
+</html>
